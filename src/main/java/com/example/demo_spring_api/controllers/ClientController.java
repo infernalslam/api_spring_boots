@@ -2,8 +2,10 @@ package com.example.demo_spring_api.controllers;
 
 import com.example.demo_spring_api.models.Admin;
 import com.example.demo_spring_api.models.Quote;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,4 +39,59 @@ public class ClientController {
     public ResponseEntity<?> postAdmin (@Valid @RequestBody Admin admin) {
         return new ResponseEntity<>(admin, HttpStatus.OK);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Autowired
+    private KafkaTemplate<String, String> KafkaTemplate;
+
+    @GetMapping("/kafka")
+    public ResponseEntity<?> helloKafka (@RequestParam(value = "payload", required = true) String payload) {
+        KafkaTemplate.send("test", "helloworld");
+        return new ResponseEntity("Hello kafka!", HttpStatus.OK);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
