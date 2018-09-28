@@ -67,8 +67,8 @@ public class ClientController {
 
     @GetMapping("/kafka")
     public ResponseEntity<?> helloKafka (@RequestParam(value = "payload", required = true) String payload) {
-        KafkaTemplate.send("test", "helloworld");
-        return new ResponseEntity("Hello kafka!", HttpStatus.OK);
+        KafkaTemplate.send("test", payload);
+        return new ResponseEntity("Sender : " + payload, HttpStatus.OK);
     }
 
 
